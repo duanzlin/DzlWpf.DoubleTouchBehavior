@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net472;netcoreapp3.1;net5.0-windows</TargetFrameworks>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <UseWPF>true</UseWPF>
+    <Authors>zilin duan</Authors>
+    <Product>DzlWpf.DoubleTouchBehavior</Product>
+    <Copyright />
+    <Description>Wpf prism application mvvm binding double touch command on touch screen computer.</Description>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Prism.Wpf" Version="8.0.0.1909" />
+	</ItemGroup>
+
+</Project>

@@ -1,0 +1,15 @@
+﻿<Window x:Class="Sample.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        xmlns:bh="clr-namespace:DzlWpf.DoubleTouchBehavior;assembly=DzlWpf.DoubleTouchBehavior"
+        Title="{Binding Title}" Height="350" Width="525">
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" />
+        <Border bh:DoubleTouched.Command="{Binding DoubleTouchCommand}" bh:DoubleTouched.CommandParameter="左上" 
+                Width="80" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top" Background="LightBlue"/>
+        <Border bh:DoubleTouched.Command="{Binding DoubleTouchCommand}" bh:DoubleTouched.CommandParameter="右上" 
+                Width="80" Height="80" HorizontalAlignment="Right" VerticalAlignment="Top" Background="LightBlue"/>
+    </Grid>
+</Window>

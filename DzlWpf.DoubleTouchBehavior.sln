@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DzlWpf.DoubleTouchBehavior", "DzlWpf.DoubleTouchBehavior\DzlWpf.DoubleTouchBehavior.csproj", "{0CF04A8F-9F93-4B1E-B69F-F6A419360AD5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{A094B8B0-3DB8-4F66-8AED-7F5BED3FD162}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0CF04A8F-9F93-4B1E-B69F-F6A419360AD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CF04A8F-9F93-4B1E-B69F-F6A419360AD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CF04A8F-9F93-4B1E-B69F-F6A419360AD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CF04A8F-9F93-4B1E-B69F-F6A419360AD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A094B8B0-3DB8-4F66-8AED-7F5BED3FD162}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A094B8B0-3DB8-4F66-8AED-7F5BED3FD162}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A094B8B0-3DB8-4F66-8AED-7F5BED3FD162}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A094B8B0-3DB8-4F66-8AED-7F5BED3FD162}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8123C95F-8662-4F32-B0EE-8D4481B7698B}
+	EndGlobalSection
+EndGlobal
