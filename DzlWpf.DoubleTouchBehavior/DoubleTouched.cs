@@ -27,6 +27,46 @@ namespace DzlWpf.DoubleTouchBehavior
             return element.GetValue(CommandParameterProperty);
         }
 
+        public static readonly DependencyProperty TouchSharedProperty = DependencyProperty.RegisterAttached("TouchShared", typeof(bool), typeof(DoubleTouched), new PropertyMetadata(OnSetTouchSharedCallback));
+        public static void SetTouchShared(UIElement element, bool shared)
+        {
+            element.SetValue(TouchSharedProperty, shared);
+        }
+        public static bool GetTouchShared(UIElement element)
+        {
+            return (bool)element.GetValue(TouchSharedProperty);
+        }
+
+        public static readonly DependencyProperty TouchInervalProperty = DependencyProperty.RegisterAttached("TouchInerval", typeof(int), typeof(DoubleTouched), new PropertyMetadata(2000, OnSetTouchInervalCallback));
+        public static void SetTouchInerval(UIElement element, int shared)
+        {
+            element.SetValue(TouchInervalProperty, shared);
+        }
+        public static int GetTouchInerval(UIElement element)
+        {
+            return (int)element.GetValue(TouchInervalProperty);
+        }
+
+        private static void OnSetTouchInervalCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            UIElement element = dependencyObject as UIElement;
+            if (element != null)
+            {
+                DoubleTouchCommandBehavior behavior = GetOrCreateBehavior(element);
+                behavior.TouchInerval = (int)e.NewValue;
+            }
+        }
+
+        private static void OnSetTouchSharedCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        {
+            UIElement element = dependencyObject as UIElement;
+            if (element != null)
+            {
+                DoubleTouchCommandBehavior behavior = GetOrCreateBehavior(element);
+                behavior.TouchShared = (bool)e.NewValue;
+            }
+        }
+
         private static void OnSetCommandCallback(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             UIElement element = dependencyObject as UIElement;

@@ -14,14 +14,22 @@ namespace Sample.ViewModels
 
         public MainWindowViewModel()
         {
-            DoubleTouchCommand = new DelegateCommand<string>(OnDoubleTouch);
+            DoubleTouchCommand = new DelegateCommand(OnDoubleTouched);
+            SharedDoubleTouchCommand = new DelegateCommand<string>(OnSharedDoubleTouched);
         }
 
-        private void OnDoubleTouch(string args)
+        private void OnDoubleTouched()
         {
-            System.Windows.MessageBox.Show("点击结果：" + args);
+            System.Windows.MessageBox.Show("这是双击效果");
         }
 
-        public DelegateCommand<string> DoubleTouchCommand { get; private set; }
+        private void OnSharedDoubleTouched(string args)
+        {
+            System.Windows.MessageBox.Show("双击结果：" + args);
+        }
+
+        public DelegateCommand DoubleTouchCommand { get; private set; }
+
+        public DelegateCommand<string> SharedDoubleTouchCommand { get; private set; }
     }
 }
