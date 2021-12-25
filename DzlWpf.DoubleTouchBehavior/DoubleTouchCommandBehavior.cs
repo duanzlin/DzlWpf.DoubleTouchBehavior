@@ -10,8 +10,7 @@ namespace DzlWpf.DoubleTouchBehavior
 {
     public class DoubleTouchCommandBehavior : CommandBehaviorBase<UIElement>
     {
-        private static TaskCompletionSource<string> _tcsShared;
-        private TaskCompletionSource<string> _tcs;
+        private static TaskCompletionSource<TouchResult> _tcs;
         public DoubleTouchCommandBehavior(UIElement element)
             : base(element)
         {
@@ -25,7 +24,7 @@ namespace DzlWpf.DoubleTouchBehavior
         /// <param name="e"></param>
         private void Element_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            OnClick();
+            OnClick(sender);
         }
 
         /// <summary>
@@ -35,21 +34,20 @@ namespace DzlWpf.DoubleTouchBehavior
         /// <param name="e"></param>
         private void Element_TouchDown(object sender, TouchEventArgs e)
         {
-            OnClick();
+            OnClick(sender);
         }
 
-        private void OnClick()
+        private void OnClick(object sender)
         {
-            var tcs = GetTaskCompletionSource();
             // 第二次点击到来，给任务赋值
-            if (tcs != null && !tcs.Task.IsCompleted && !tcs.Task.IsCanceled)
+            if (_tcs != null && !_tcs.Task.IsCompleted && !_tcs.Task.IsCanceled)
             {
-                tcs.TrySetResult(CommandParameter?.ToString());
+                _tcs.TrySetResult(new TouchResult { CommandParameter = CommandParameter?.ToString(), Source = sender });
             }
             // 第一次点击到来，则等待第二次点击
             else
             {
-                _ = WaitAndClickOther(CommandParameter?.ToString());
+                _ = WaitAndClickOther(sender, CommandParameter?.ToString());
             }
         }
 
@@ -58,17 +56,20 @@ namespace DzlWpf.DoubleTouchBehavior
         /// </summary>
         /// <param name="first">第一次按键</param>
         /// <returns></returns>
-        private async Task WaitAndClickOther(string first)
+        private async Task WaitAndClickOther(object sender, string first)
         {
-            InitTaskCompletionSource();
-
-            var tcs = GetTaskCompletionSource();
+            _tcs = new TaskCompletionSource<TouchResult>();
 
             // 登记第二次点击任务结果，三秒内未点击第二次，则双击任务取消结束
-            var second = await tcs.WithCancellation(new CancellationTokenSource(Math.Max(500, TouchInerval)).Token);
+            var second = await _tcs.WithCancellation(new CancellationTokenSource(Math.Max(500, TouchInerval)).Token);
+
+            // 单个元素双击事件时，两次点击不是同一控件
+            if (!TouchShared && sender != second.Source)
+                return;
+
             // 保存命令参数
             var origin = CommandParameter?.ToString();
-            CommandParameter = $"{first},{second}";
+            CommandParameter = $"{first},{second.CommandParameter}";
             ExecuteCommand(CommandParameter);
 
             // 还原命令参数
@@ -80,23 +81,13 @@ namespace DzlWpf.DoubleTouchBehavior
 
         public int TouchInerval { get; set; } = 2000;
 
-        private TaskCompletionSource<string> GetTaskCompletionSource()
-        {
-            return TouchShared ? _tcsShared : _tcs;
-        }
+    }
 
-        private void InitTaskCompletionSource()
-        {
-            if (TouchShared)
-            {
-                _tcsShared = new TaskCompletionSource<string>();
-            }
-            else
-            {
-                _tcs = new TaskCompletionSource<string>();
-            }
-        }
+    public class TouchResult
+    {
+        public object Source { get; set; }
 
+        public string CommandParameter { get; set; }
     }
 
 }

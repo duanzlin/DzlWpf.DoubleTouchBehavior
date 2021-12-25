@@ -8,6 +8,8 @@
     <Product>DzlWpf.DoubleTouchBehavior</Product>
     <Copyright />
     <Description>Wpf prism application mvvm binding double touch command on touch screen computer.</Description>
+    <PackageProjectUrl>https://github.com/duanzlin/WpfDoubleTouchBehavior</PackageProjectUrl>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
 	<ItemGroup>

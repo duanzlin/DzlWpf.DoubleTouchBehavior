@@ -7,7 +7,7 @@
         Title="{Binding Title}" Height="350" Width="525">
     <Grid>
         <ContentControl prism:RegionManager.RegionName="ContentRegion" />
-        <Border bh:DoubleTouched.Command="{Binding DoubleTouchCommand}"
+        <Border bh:DoubleTouched.Command="{Binding DoubleTouchCommand}" bh:DoubleTouched.TouchInerval="4000"
                 Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" Background="LightGreen"/>
 
         <Border bh:DoubleTouched.Command="{Binding SharedDoubleTouchCommand}" bh:DoubleTouched.CommandParameter="左上" bh:DoubleTouched.TouchShared="True"
